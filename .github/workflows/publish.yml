@@ -20,4 +20,4 @@ jobs:
       run: |
         docker build . --tag ghcr.io/matjazp/alpine-bind:latest
         docker run ghcr.io/matjazp/alpine-bind:latest
-        docker push ghcr.io/matjazp/alpine-bind:lates
+        docker push ghcr.io/matjazp/alpine-bind:latest
