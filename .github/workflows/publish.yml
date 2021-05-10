@@ -9,8 +9,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the Docker image
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push the Docker image
       run: |
-        echo $CR_PAT | docker login ghcr.io -u matjazp --password-stdin
-      env:
-        CR_PAT: ${{ secrets.CR_PAT }}
+        docker build . --tag ghcr.io/matjazp/alpine-bind:latest
+        docker run ghcr.io/matjazp/alpine-bind:latest
+        docker push ghcr.io/matjazp/alpine-bind:lates
